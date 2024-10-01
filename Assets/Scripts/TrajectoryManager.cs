@@ -111,13 +111,17 @@ namespace BubbleShooter
             RaycastHit2D[] hits = Physics2D.CircleCastAll(calculatedPosition, collisionCheckRadius, Vector2.down, 0.1f);
             if (hits.Length > 0)
             {
-                if (hits[0].collider.CompareTag("BottomCollider"))
+                bool result = false;
+                foreach(RaycastHit2D hit in hits)
                 {
-                    isTouchingBottom = true;
-                } else
-                {
-                    isTouchingBottom = false;
+
+                    if (hit.collider.CompareTag("BottomCollider"))
+                    {
+                        result = true;
+                    }
                 }
+                isTouchingBottom = result;
+
             }
         }
 
